@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>হোয়াটসঅ্যাপ নোটিশ বোর্ড</title>
+    <title>নোটিশ বোর্ড</title>
     <style>
         * {
             margin: 0;
@@ -15,6 +15,7 @@
         body {
             background-color: #f0f2f5;
             color: #333;
+            line-height: 1.6;
         }
 
         header {
@@ -27,6 +28,7 @@
         header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
+            font-family: 'Georgia', serif;
         }
 
         .container {
@@ -38,62 +40,39 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .notice-form {
-            margin-bottom: 30px;
-        }
-
-        .notice-form textarea {
-            width: 100%;
-            height: 100px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: vertical;
-            font-size: 1em;
-        }
-
-        .notice-form input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-
-        .notice-form button {
-            background-color: #25D366;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        .notice-form button:hover {
-            background-color: #20b558;
-        }
-
-        .notice-board {
-            margin-top: 20px;
-        }
-
         .notice {
             background-color: #f9f9f9;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
+            padding: 20px;
+            border-radius: 8px;
             border-left: 5px solid #25D366;
+            margin-bottom: 20px;
+        }
+
+        .notice h2 {
+            font-size: 1.8em;
+            color: #25D366;
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
+            text-align: center;
         }
 
         .notice p {
-            margin-bottom: 10px;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
         }
 
-        .notice .author {
+        .author {
+            font-size: 1.1em;
             font-style: italic;
             color: #555;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .emoji {
+            font-size: 1.5em;
         }
 
         footer {
@@ -108,61 +87,44 @@
 
         @media (max-width: 600px) {
             header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
 
             .container {
                 margin: 10px;
                 padding: 15px;
             }
+
+            .notice h2 {
+                font-size: 1.5em;
+            }
+
+            .notice p {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>হোয়াটসঅ্যাপ নোটিশ বোর্ড</h1>
-        <p>আপনার নোটিশ এখানে শেয়ার করুন</p>
+        <h1>নোটিশ বোর্ড</h1>
+        <p>আমাদের সর্বশেষ ঘোষণা</p>
     </header>
 
     <div class="container">
-        <div class="notice-form">
-            <h2>নতুন নোটিশ পোস্ট করুন</h2>
-            <input type="text" id="authorName" placeholder="আপনার নাম লিখুন" required>
-            <textarea id="noticeText" placeholder="আপনার নোটিশ লিখুন..." required></textarea>
-            <button onclick="postNotice()">নোটিশ পোস্ট করুন</button>
-        </div>
-
-        <div class="notice-board" id="noticeBoard">
-            <!-- নোটিশ এখানে প্রদর্শিত হবে -->
+        <div class="notice">
+            <h2>🌸 আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ 🌸</h2>
+            <p>আসসালামু আলাইকুম! আশা করি আপনারা সবাই ভালো আছেন।</p>
+            <p>📖 আজ আমি একটি খতম-এ-কুরআন প্রোগ্রামে আমন্ত্রণ পেয়েছি।</p>
+            <p>🕌 তাই আমি আজ মাদ্রাসায় উপস্থিত থাকতে পারব না।</p>
+            <p>🌤️ ইন শা আল্লাহ, আমি আগামীকাল থেকে যথারীতি উপস্থিত থাকব।</p>
+            <p>🤲 দয়া করে আমাকে আপনাদের দোয়ায় রাখবেন।</p>
+            <p class="author">— Sk Shayeemuddin</p>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 হোয়াটসঅ্যাপ নোটিশ বোর্ড। সর্বস্বত্ব সংরক্ষিত।</p>
+        <p>&copy; 2025 নোটিশ বোর্ড। সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
-
-    <script>
-        function postNotice() {
-            const noticeText = document.getElementById('noticeText').value;
-            const authorName = document.getElementById('authorName').value;
-            const noticeBoard = document.getElementById('noticeBoard');
-
-            if (noticeText.trim() === '' || authorName.trim() === '') {
-                alert('অনুগ্রহ করে নাম এবং নোটিশ পূরণ করুন!');
-                return;
-            }
-
-            const noticeDiv = document.createElement('div');
-            noticeDiv.classList.add('notice');
-            noticeDiv.innerHTML = `
-                <p>${noticeText}</p>
-                <p class="author">পোস্ট করেছেন: ${authorName} | তারিখ: ${new Date().toLocaleString('bn-BD')}</p>
-            `;
-
-            noticeBoard.prepend(noticeDiv);
-            document.getElementById('noticeText').value = '';
-            document.getElementById('authorName').value = '';
-        }
-    </script>
 </body>
 </html>
