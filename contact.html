@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>School — Contact</title>
+  <style>
+    body{margin:0;font-family:system-ui;background:#f4f6f8;color:#111}
+    header{background:#2c3e50;color:#fff;padding:12px 0}
+    nav{display:flex;justify-content:center;gap:18px}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    .container{max-width:800px;margin:20px auto;padding:16px}
+    form{background:#fff;padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    input,textarea,button{width:100%;padding:10px;margin-top:8px;border-radius:6px;border:1px solid #ddd}
+    button{background:#27ae60;color:#fff;border:none;font-weight:700;cursor:pointer}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="admission.html">Admission</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Contact Us</h1>
+    <form id="contactForm">
+      <input name="name" type="text" placeholder="Your name" required />
+      <input name="email" type="email" placeholder="Your email" required />
+      <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="status" style="margin-top:10px;color:#333"></p>
+  </main>
+
+  <script>
+    const SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE"; // <-- এখানে তোমার Apps Script URL বসাও
+
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        message: form.message.value.trim()
+      };
+      if(!SCRIPT_URL || SCRIPT_URL.includes("YOUR_APPS_SCRIPT_URL_HERE")){
+        // No backend configured — demo behaviour
+        status.textContent = "Message sent (demo). Replace SCRIPT_URL to actually save.";
+        form.reset();
+        return;
+      }
+      status.textContent = "Sending...";
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(data)
+      }).then(r => r.json())
+        .then(j => {
+          status.textContent = "Message sent successfully!";
+          form.reset();
+        }).catch(err=>{
+          status.textContent = "Error sending. Check console.";
+          console.error(err);
+        });
+    });
+  </script>
+</body>
+</html>

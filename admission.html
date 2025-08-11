@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>School — Admission Form</title>
+  <style>
+    body{margin:0;font-family:system-ui;background:#f4f6f8;color:#111}
+    header{background:#2c3e50;color:#fff;padding:12px 0}
+    nav{display:flex;justify-content:center;gap:18px}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    .container{max-width:900px;margin:20px auto;padding:16px}
+    form{background:#fff;padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    label{font-weight:600}
+    input,select,textarea,button{width:100%;padding:10px;margin-top:8px;border-radius:6px;border:1px solid #ddd}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .photo-preview{margin-top:10px;max-width:140px;border-radius:8px;border:1px solid #ccc}
+    @media(max-width:600px){.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="admission.html">Admission</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Admission Form</h1>
+    <form id="admissionForm">
+      <div class="two-col">
+        <div>
+          <label>Full name</label>
+          <input name="fullName" required />
+        </div>
+        <div>
+          <label>Date of birth</label>
+          <input name="dob" type="date" required />
+        </div>
+      </div>
+
+      <label>Gender</label>
+      <select name="gender" required>
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+
+      <label>Address</label>
+      <textarea name="address" rows="3" required></textarea>
+
+      <div class="two-col">
+        <div>
+          <label>Guardian's name</label>
+          <input name="guardianName" required />
+        </div>
+        <div>
+          <label>Guardian's phone</label>
+          <input name="guardianPhone" type="tel" required />
+        </div>
+      </div>
+
+      <label>Previous school (if any)</label>
+      <input name="previousSchool" />
+
+      <label>Upload Photo (passport size)</label>
+      <input id="photoInput" name="photo" type="file" accept="image/*" required />
+      <img id="photoPreview" class="photo-preview" alt="photo preview" style="display:none"/>
+
+      <p style="color:#666;font-size:14px">**নোট:** ছবি ও ফাইল সার্ভারে সেভ করতে হলে ব্যাকএন্ড লাগবে — এখানের সাবমিশন ডেমো ফরম হিসেবে কাজ করবে।</p>
+
+      <button type="submit">Submit Admission</button>
+      <p id="admStatus" style="margin-top:10px;color:#333"></p>
+    </form>
+  </main>
+
+  <script>
+    // preview photo
+    const photoInput = document.getElementById('photoInput');
+    const photoPreview = document.getElementById('photoPreview');
+    photoInput.addEventListener('change', () => {
+      const f = photoInput.files[0];
+      if(!f) { photoPreview.style.display='none'; return; }
+      const url = URL.createObjectURL(f);
+      photoPreview.src = url;
+      photoPreview.style.display = 'block';
+    });
+
+    // submit (demo / stub)
+    const admForm = document.getElementById('admissionForm');
+    const admStatus = document.getElementById('admStatus');
+    // Replace ADMISSION_API with your backend endpoint if you have one
+    const ADMISSION_API = ""; // e.g. your Apps Script or server endpoint
+
+    admForm.addEventListener('submit', e=>{
+      e.preventDefault();
+      const data = {
+        fullName: admForm.fullName.value.trim(),
+        dob: admForm.dob.value,
+        gender: admForm.gender.value,
+        address: admForm.address.value.trim(),
+        guardianName: admForm.guardianName.value.trim(),
+        guardianPhone: admForm.guardianPhone.value.trim(),
+        previousSchool: admForm.previousSchool.value.trim()
+      };
+      if(!ADMISSION_API){
+        admStatus.textContent = "Application submitted (demo). To actually save data + photo, add server endpoint.";
+        admForm.reset(); photoPreview.style.display='none';
+        return;
+      }
+      admStatus.textContent = "Submitting...";
+      // If you have a real endpoint that accepts JSON:
+      fetch(ADMISSION_API, {method:'POST', body: JSON.stringify(data)})
+        .then(r=>r.json()).then(j=>{
+          admStatus.textContent = "Submitted successfully!";
+          admForm.reset(); photoPreview.style.display='none';
+        }).catch(err=>{
+          admStatus.textContent = "Error sending. Check console.";
+          console.error(err);
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>School — Home</title>
+  <style>
+    :root{--accent:#2c3e50;--green:#27ae60;--muted:#666}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:#f4f6f8;color:#111}
+    header{background:var(--accent);color:#fff;padding:12px 0;position:sticky;top:0;z-index:10}
+    nav{display:flex;justify-content:center;gap:18px}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    .container{max-width:1000px;margin:20px auto;padding:16px}
+    .hero{background:#fff;padding:20px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,0.06)}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+    .card{background:#fff;padding:14px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.04)}
+    footer{text-align:center;color:var(--muted);padding:18px 0;margin-top:18px}
+    @media(max-width:420px){nav{gap:10px;padding:0 8px}}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="admission.html">Admission</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Welcome to Our School</h1>
+      <p>উচ্চ মানের শিক্ষা, সুরক্ষিত পরিবেশ এবং আধুনিক পাঠোপকরণ। নিচে সাম্প্রতিক খবর ও ক্লাসের হাইলাইট দেখুন।</p>
+      <div class="cards">
+        <div class="card">
+          <h3>News</h3>
+          <p>ইভেন্ট: বার্ষিক ক্রীড়া প্রতিযোগিতা — ২৫শে নভেম্বর</p>
+        </div>
+        <div class="card">
+          <h3>Notice</h3>
+          <p>নিবন্ধন শুরু হয়েছে — নতুন ভর্তির জন্য আবেদন করুন।</p>
+        </div>
+        <div class="card">
+          <h3>Gallery</h3>
+          <p>ছবি ও ভিডিও শীঘ্রই আপলোড করা হবে।</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Our School — All rights reserved.
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
